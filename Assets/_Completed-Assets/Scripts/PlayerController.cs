@@ -10,12 +10,15 @@ public class PlayerController : MonoBehaviour
     private int count;
 
     public Text countText;
-    
+    public Text winText;
+
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
 
         count = 0;
+
+        winText.text = "";
 
         SetCountText();
     }
@@ -45,6 +48,11 @@ public class PlayerController : MonoBehaviour
     void SetCountText()
     {
         countText.text = "Count: " + count.ToString();
+
+        if(count >= 12)
+        {
+            winText.text = "You win!";
+        }
     }
 
 }
