@@ -12,6 +12,11 @@ public class PlayerController : MonoBehaviour
     public Text countText;
     public Text winText;
 
+    private bool isRed;
+
+    public string pickupName = "";
+
+
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -21,6 +26,28 @@ public class PlayerController : MonoBehaviour
         winText.text = "";
 
         SetCountText();
+
+        isRed = false;
+
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Q))
+        {
+            gameObject.GetComponent<Renderer>().material.color = Color.red;
+
+            pickupName = "PickUp";
+        }
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            gameObject.GetComponent<Renderer>().material.color = Color.blue;
+
+            pickupName = "BluePickup";
+
+            isRed = false;
+        }
     }
 
     void FixedUpdate()
@@ -35,7 +62,7 @@ public class PlayerController : MonoBehaviour
   
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("PickUp"))
+        if(other.gameObject.CompareTag(pickupName))
         {
             other.gameObject.SetActive(false);
 
